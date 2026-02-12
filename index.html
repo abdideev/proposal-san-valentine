@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white; 
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; 
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: black;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background-color: white;
+            color: black;
+            border-color: black;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #yesBtn:hover {
+            background-color: #d4d4d4;
+            transform: scale(1.05);
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #noBtn:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="mainImage" src="minion-minion-loves.gif" alt="Cute bear">
+        
+        <h1 id="question">¿Quieres ser mi San Valentín?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn">¡Sí!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const question = document.getElementById('question');
+        const mainImage = document.getElementById('mainImage');
+        const container = document.querySelector('.container');
+
+        const phrases = [
+            "¿Estás segura?",
+            "¿De verdad?",
+            "¡Piénsalo bien!",
+            "¡Mira que soy buena onda!",
+            "¡Me romperás el corazón!",
+            "¡Voy a llorar!",
+            "¡No seas así!",
+            "¡Di que sí por favor!",
+            "¡Andaaa!",
+        ];
+
+        let phraseIndex = 0;
+        let currentFontSize = 20; 
+
+        noBtn.addEventListener('click', () => {
+            noBtn.innerText = phrases[phraseIndex];
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            currentFontSize += 20;
+            yesBtn.style.fontSize = `${currentFontSize}px`;
+            yesBtn.style.padding = `${currentFontSize / 2}px ${currentFontSize}px`;
+
+            if (currentFontSize > 100) {
+                mainImage.style.display = "none";
+                question.style.display = "none";
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.body.innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+                    <img src="minion-minion-loves.gif" alt="Happy Cat" style="max-width: 300px; border-radius: 15px;">
+                    <p style="color: black; font-size: 1.2rem; margin-top: 10px;">papoi</p>
+                    <h2 style="color: black; font-size: 1.5rem; margin-top: 20px; ">¡Te amo un mundo entero ñeca! ¡Sabía que dirías que sí! ❤️</h2>
+                </div>
+            `;
+            
+        });
+    </script>
+</body>
+</html>
